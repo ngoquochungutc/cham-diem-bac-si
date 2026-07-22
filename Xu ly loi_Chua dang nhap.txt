@@ -1,0 +1,9 @@
+Nếu bạn đã gửi Header rồi mà vẫn bị 401, có thể Backend đang "ngó lơ" cái Header đó.
+
+Lỗi mất Header Authorization do Apache/Nginx:
+Đôi khi server web tự động loại bỏ Header Authorization. Bạn hãy mở file .htaccess trong thư mục public/ và thêm dòng này:
+
+Apache
+RewriteEngine On
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
